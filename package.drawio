@@ -1,0 +1,40 @@
+<mxfile host="65bd71144e">
+    <diagram id="c1NRbHTkfh1PrFlQKwDd" name="Page-1">
+        <mxGraphModel dx="1953" dy="783" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="2" value="Domain" style="shape=folder;fontStyle=1;spacingTop=10;tabWidth=40;tabHeight=14;tabPosition=left;html=1;align=left;verticalAlign=top;" vertex="1" parent="1">
+                    <mxGeometry x="-60" y="370" width="460" height="340" as="geometry"/>
+                </mxCell>
+                <mxCell id="5" value="Infrastructure" style="shape=folder;fontStyle=1;spacingTop=10;tabWidth=40;tabHeight=14;tabPosition=left;html=1;align=left;verticalAlign=top;" vertex="1" parent="1">
+                    <mxGeometry x="540" y="370" width="300" height="330" as="geometry"/>
+                </mxCell>
+                <mxCell id="6" value="Ingredients" style="shape=folder;fontStyle=1;spacingTop=10;tabWidth=40;tabHeight=14;tabPosition=left;html=1;align=left;verticalAlign=top;" vertex="1" parent="1">
+                    <mxGeometry x="160" y="430" width="200" height="250" as="geometry"/>
+                </mxCell>
+                <mxCell id="7" value="&lt;pre&gt;Produit&lt;br&gt;&lt;pre&gt;Burger&lt;br&gt;&lt;pre&gt;Accompagnement&lt;br&gt;&lt;pre&gt;Boisson&lt;/pre&gt;&lt;pre&gt;BurgerPersonnalise&lt;/pre&gt;&lt;br&gt;&lt;/pre&gt;&lt;/pre&gt;&lt;/pre&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+                    <mxGeometry y="610" width="60" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="10" value="Use" style="endArrow=open;endSize=12;dashed=1;html=1;exitX=0.005;exitY=0.863;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="5" target="2">
+                    <mxGeometry width="160" relative="1" as="geometry">
+                        <mxPoint x="340" y="560" as="sourcePoint"/>
+                        <mxPoint x="500" y="560" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="11" value="Ingredient&lt;br&gt;&lt;pre&gt;Pain&lt;br&gt;&lt;pre&gt;Proteine&lt;br&gt;&lt;pre&gt;Garniture&lt;br&gt;&lt;pre&gt;&lt;br/&gt;&lt;/pre&gt;&lt;/pre&gt;&lt;/pre&gt;&lt;/pre&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+                    <mxGeometry x="190" y="560" width="60" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="13" value="Client&lt;br&gt;&lt;pre&gt;Fournisseur&lt;br/&gt;&lt;pre&gt;Promotion&lt;br/&gt;&lt;pre&gt;Paiement&lt;/pre&gt;&lt;br/&gt;&lt;br/&gt;&lt;/pre&gt;&lt;/pre&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+                    <mxGeometry x="590" y="480" width="60" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="14" value="&amp;nbsp;Enum" style="shape=folder;fontStyle=1;spacingTop=10;tabWidth=40;tabHeight=14;tabPosition=left;html=1;align=left;verticalAlign=top;" vertex="1" parent="1">
+                    <mxGeometry x="600" y="550" width="170" height="130" as="geometry"/>
+                </mxCell>
+                <mxCell id="15" value="&lt;pre&gt;StatutCommande&lt;br/&gt;&lt;pre&gt;CanalCommande&lt;br/&gt;&lt;pre&gt;NiveauFidelite&lt;/pre&gt;&lt;/pre&gt;&lt;/pre&gt;" style="text;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="620" y="580" width="110" height="60" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>
