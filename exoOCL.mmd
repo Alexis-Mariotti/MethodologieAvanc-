@@ -222,4 +222,13 @@ classDiagram
     
 
     %% OCL
+    
+    %% Calcul du volume en m cube
+    note for Boisson "context Boisson::volumeMettreCube : Double
+    derive self.volumeLitre / 1000 "
+
+    %% Calcul montantBrut
+    not for Commande "context Commande::montantBrut : Double
+    derive self.lignes->collect(quantite * prixunitaire)->sum()"
+
 
