@@ -14,6 +14,9 @@ changer en pre condution quand on aura une methode "achat"
 context Evenement
 inv: self.nbBilletAcheté <= self.lieu.capacité
 
+context Billet
+inv: self.dateAchat <= self.evenement.date
+
 context SuperEvenement::ajouterEvenement(event : Evenement)
 pre evenementValide : not self.evenements.contains(event)
 
