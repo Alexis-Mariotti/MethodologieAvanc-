@@ -222,7 +222,7 @@ classDiagram
     
 
     %% OCL
-    
+
     %% Calcul du volume en m cube
     note for Boisson "context Boisson::volumeMettreCube : Double
     derive self.volumeLitre / 1000 "
@@ -232,3 +232,17 @@ classDiagram
     derive self.lignes->collect(quantite * prixunitaire)->sum()"
 
 
+    %% Un BurgerPersonnalise doit obligatoirement avoir un pain et une protéine définis
+    note for BurgerPersonnalise "context BurgerPersonnalise inv: self.painChoisi != null and self.proteine != null"
+
+    %% Le prixTTC d’un Produit doit toujours être supérieur ou égale à son coutActue
+    note for Produit "context Produit inv: self.prixTTC >= self.coutActuel"
+
+    %% Le niveau d’un Client doit correspondre aux bornes de points de fidélités 
+    note for Client "context Client inv: (self.niveau = NiveauFidelite::BRONZE implies self.pointsFidelite >= 0 and self.pointsFidelite < 50) and (self.niveau = NiveauFidelite::SILVER implies self.pointsFidelite >= 50 and self.pointsFidelite < 200) and (self.niveau = NiveauFidelite::GOLD implies self.pointsFidelite >= 200)"
+
+    %% La postcondition de l’opération Commande.calculerMontantTotal() doit retourner une valeur égale à la somme des sousTotal de toutes ces lignes
+    note for Commande ""
+
+    %% Si une Commande est associée à une Promotion, alors cette promotion doit être applicable à au moins un des Produits commandés
+    note for Promotion ""
