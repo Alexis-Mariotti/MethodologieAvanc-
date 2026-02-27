@@ -1,0 +1,225 @@
+classDiagram
+    direction TB
+
+    class Produit {
+        <<abstract>>
+        # nom : String
+        # prixTTC : double
+        # categorie : String
+        # tempsPreparation : int
+        - coutActuel : double
+        + getNom() String
+        + getPrixTTC() double
+        + getCategorie() String
+        + getTempsPreparation() int
+        + getCoutActuel() double
+        # mettreAJourCout(cout : double) void
+        - recalculerCout() void
+    }
+
+    class Burger {
+        # personnalisable : boolean
+        + estPersonnalisable() bmmdean
+        + calculerPrixSpecifique() double
+    }
+
+    class Accompagnement {
+        - optionTaille : String
+        + getOptionTaille() String
+        + calculerPrixSpecifique() double
+    }
+
+    class Boisson {
+        - volumeLitres : double
+        - /volumeMettreCube : double
+        + calculerPrixSpecifique() double
+    }
+
+    class Sauce {
+        - epicee : boolean
+        + estEpicee() boolean
+        + calculerPrixSpecifique() double
+    }
+
+    class BurgerPersonnalise {
+        - painChoisi : Pain
+        - proteine : Proteine
+        - garnitures : List<Garniture>
+        - ingredientsRetires : Set<Ingredient>
+        + BurgerPersonnalise(pain : Pain, proteine : Proteine)
+        + ajouterGarniture(garniture : Garniture) void
+        + retirerIngredientDeBase(ingredient : Ingredient) void
+        + calculerPrixFinal() double
+        + obtenirIngredientsActuels() List<Ingredient>
+        - validerComposition() void
+        + calculerPrixSpecifique() double
+    }
+
+    class Ingredient {
+        # nom : String
+        # reference : String
+        - quantiteStock : double
+        - seuilAlerte : double
+        - prixAchatUnitaire : double
+        + getNom() String
+        + getReference() String
+        + getQuantiteStock() double
+        + getPrixAchat() double
+        + estEnRuptureProche() boolean
+        + consommer(quantite : double) void throws StockInsuffisantException
+        - verifierInvariantStock() void
+    }
+
+    class Pain {
+        - type : String
+        - sansGluten : boolean
+        + getType() String
+        + estSansGluten() boolean
+    }
+
+    class Proteine {
+        - type : String
+        - vegetarienne : boolean
+        + getType() String
+        + estVegetarienne() boolean
+    }
+
+    class Garniture {
+        - prixSupplementaire : double
+        + getPrixSupplementaire() double
+    }
+
+    class Commande {
+        - numero : String
+        - dateHeureCreation : LocalDateTime
+        - canal : CanalCommande
+        - statut : StatutCommande
+        - client : Client
+        - lignes : List<LigneCommande>
+        - paiement : Paiement
+        - promotion : Promotion
+        - /montantBrut : double
+        + getNumero() String
+        + getDateCreation() LocalDateTime
+        + getStatut() StatutCommande
+        + ajouterLigne(ligne : LigneCommande) void
+        + changerStatut(nouveauStatut : StatutCommande) void
+        + calculerMontantTotal() double
+        - mettreAJourHistoriqueStatut(precedent : StatutCommande, suivant : StatutCommande) void
+        - verifierValiditeTransition(cible : StatutCommande) void
+    }
+
+    class LigneCommande {
+        - quantite : int
+        - prixUnitaire : double
+        - produitCommande : Produit
+        + getQuantite() int
+        + getPrixUnitaire() double
+        + getProduit() Produit
+        + getSousTotal() double
+        - definirPrixUnitaire(prix : double) void
+    }
+
+    class Client {
+        - email : String
+        - prenom : String
+        - nom : String
+        - dateInscription : LocalDate
+        - pointsFidelite : int
+        - niveau : NiveauFidelite
+        + getEmail()  String
+        + getNomComplet()  String
+        + getPoints()  int
+        + getNiveauActuel()  NiveauFidelite
+        + ajouterPoints(points : int) void
+        - mettreAJourNiveauFidelite() void
+    }
+
+    class Fournisseur {
+        # nom : String
+        # emailContact : String
+        # telephone : String
+        + approvisionner(ingredient : Ingredient, quantite : double) void
+    }
+
+    class Promotion {
+        - code : String
+        - pourcentageReduction : double
+        - dateDebut : LocalDate
+        - dateFin : LocalDate
+        + estApplicable(produit : Produit) boolean
+        + appliquerReduction(prix : double) double
+    }
+
+    class Paiement {
+        - methode : String
+        - montant : double
+        - datePaiement : LocalDateTime
+        - reussi : boolean
+        + estReussi() boolean
+        + traiterPaiement() void
+    }
+
+    %% Énumérations
+    class StatutCommande {
+        <<enumeration>>
+        EN_ATTENTE
+        EN_PREPARATION
+        PRETE
+        REMISE
+        ANNULEE
+    }
+
+    class CanalCommande {
+        <<enumeration>>
+        SUR_PLACE
+        CLICK_AND_COLLECT
+        LIVRAISON
+    }
+
+    class NiveauFidelite {
+        <<enumeration>>
+        BRONZE
+        SILVER
+        GOLD
+    }
+
+    %% Relations
+    Produit <|-- Burger
+    Produit <|-- Accompagnement
+    Produit <|-- Boisson
+    Produit <|-- Sauce
+    Burger <|-- BurgerPersonnalise
+
+    Ingredient <|-- Pain
+    Ingredient <|-- Proteine
+    Ingredient <|-- Garniture
+
+    Commande "1" *-- "1..*" LigneCommande : contient
+
+    Produit "1" o-- "0..*" Ingredient : utilise
+
+    LigneCommande "1" --> "1" Produit : référence
+    Commande "0..1" --> "1" Client : passée par
+    Commande "0..1" --> "0..1" Paiement : réglée par
+    Commande "0..1" --> "0..1" Promotion : applique
+    Ingredient "0..*" --> "0..*" Fournisseur : approvisionné par
+
+    BurgerPersonnalise "1" --> "1" Pain : choisit
+    BurgerPersonnalise "1" --> "1" Proteine : choisit
+    BurgerPersonnalise "1" --> "0..*" Garniture : ajoute
+
+    Commande --> StatutCommande
+    Commande --> CanalCommande
+    Client --> NiveauFidelite
+
+    %% Notes
+    note for Produit "Classe abstraite. Méthode abstraite implicite : calculerPrixSpecifique()"
+    note for Commande "Composition forte avec LigneCommande. Les lignes disparaissent avec la commande"
+    note for Produit "Agrégation avec Ingredient. Ingrédients peuvent être partagés"
+    note for BurgerPersonnalise "Spécialisation de Burger. Composition avec Pain, Protéine, Garniture"
+    note for StatutCommande "Énumération pour statuts fixes"
+    
+
+    %% OCL
+
